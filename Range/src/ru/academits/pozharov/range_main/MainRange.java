@@ -4,10 +4,8 @@ import ru.academits.pozharov.range.Range;
 
 import java.util.Scanner;
 
-public class Main {
+public class MainRange {
     public static void main(String[] args) {
-        Range range = new Range(0, 0);
-
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Введите начальное число диапазона: ");
@@ -15,6 +13,8 @@ public class Main {
 
         System.out.print("Введите конечное число диапазона: ");
         double endNumber = scanner.nextDouble();
+
+        Range range = new Range(startNumber, endNumber);
 
         range.setFrom(startNumber);
         range.setTo(endNumber);
