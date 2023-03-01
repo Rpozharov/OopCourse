@@ -4,20 +4,20 @@ import ru.academits.pozharov.range.Range;
 
 import java.util.Scanner;
 
-public class MainRange {
+public class RangeMain {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Введите начальное число диапазона: ");
-        double startNumber = scanner.nextDouble();
+        double from = scanner.nextDouble();
 
         System.out.print("Введите конечное число диапазона: ");
-        double endNumber = scanner.nextDouble();
+        double to = scanner.nextDouble();
 
-        Range range = new Range(startNumber, endNumber);
+        Range range = new Range(0, 0);
 
-        range.setFrom(startNumber);
-        range.setTo(endNumber);
+        range.setFrom(from);
+        range.setTo(to);
 
         System.out.println("Начальное число диапазона = " + range.getFrom());
         System.out.println("Конечное число диапазона = " + range.getTo());
