@@ -58,11 +58,11 @@ public class Range {
             return new Range[]{};
         }
 
-        if (from > range.from) {
+        if (from >= range.from) {
             return new Range[]{new Range(range.to, to)};
         }
 
-        if (to < range.to) {
+        if (to <= range.to) {
             return new Range[]{new Range(from, range.from)};
         }
 

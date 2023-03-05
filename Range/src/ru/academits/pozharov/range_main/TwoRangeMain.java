@@ -16,20 +16,19 @@ public class TwoRangeMain {
         double to1 = scanner.nextDouble();
 
         System.out.print("Введите начальное число 2-го диапазона: ");
-        double to2 = scanner.nextDouble();
+        double from2 = scanner.nextDouble();
 
         System.out.print("Введите конечное число 2-го диапазона: ");
-        double endNumber2 = scanner.nextDouble();
+        double to2 = scanner.nextDouble();
 
         Range range1 = new Range(from1, to1);
-        Range range2 = new Range(to2, endNumber2);
+        Range range2 = new Range(from2, to2);
         Range intersectionRange = range1.getIntersection(range2);
 
         if (intersectionRange == null) {
             System.out.println("Пересечения нет");
         } else {
-            System.out.printf("Диапазон пересечения = (%.1f; %.1f)%n",
-                    intersectionRange.getFrom(), intersectionRange.getTo());
+            System.out.printf("Диапазон пересечения = %s%n", intersectionRange);
         }
 
         System.out.printf("Диапазон объединения = %s%n", Arrays.toString(range1.getUnion(range2)));
