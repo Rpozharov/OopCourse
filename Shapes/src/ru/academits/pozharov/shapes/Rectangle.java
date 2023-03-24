@@ -31,7 +31,7 @@ public class Rectangle implements Shape {
 
     @Override
     public String toString() {
-        return String.format("прямоугольник с длинами сторон %.1f и %.1f ", +width, height);
+        return String.format("Прямоугольник с шириной %.1f и высотой %.1f", width, height);
     }
 
     @Override

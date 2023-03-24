@@ -7,6 +7,10 @@ public class Square implements Shape {
         this.sideLength = sideLength;
     }
 
+    public double getSideLength() {
+        return sideLength;
+    }
+
     @Override
     public double getWidth() {
         return sideLength;
@@ -29,7 +33,7 @@ public class Square implements Shape {
 
     @Override
     public String toString() {
-        return "квадрат с длиной стороны " + sideLength;
+        return "Квадрат с длиной стороны " + sideLength;
     }
 
     @Override
