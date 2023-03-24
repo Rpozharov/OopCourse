@@ -1,6 +1,7 @@
 package ru.academits.pozharov.shapes_main;
 
 import ru.academits.pozharov.shapes.*;
+import ru.academits.pozharov.shapes_comparators.figureAreaComparator;
 import ru.academits.pozharov.shapes_comparators.figurePerimeterComparator;
 
 import java.util.Arrays;
@@ -24,12 +25,15 @@ public class ShapesMain {
     }
 
     public static Shape getFigureWithMaxArea(Shape[] shapes) {
-        Arrays.sort(shapes, new figurePerimeterComparator());
-
         if (shapes.length == 0) {
             return null;
         }
 
+        if (shapes.length == 1) {
+            return shapes[0];
+        }
+
+        Arrays.sort(shapes, new figureAreaComparator());
         return shapes[shapes.length - 1];
     }
 
