@@ -1,8 +1,8 @@
 package ru.academits.pozharov.shapes_main;
 
 import ru.academits.pozharov.shapes.*;
-import ru.academits.pozharov.shapes_comparators.figureAreaComparator;
-import ru.academits.pozharov.shapes_comparators.figurePerimeterComparator;
+import ru.academits.pozharov.shapes_comparators.ShapeAreaComparator;
+import ru.academits.pozharov.shapes_comparators.ShapePerimeterComparator;
 
 import java.util.Arrays;
 
@@ -19,34 +19,25 @@ public class ShapesMain {
                 new Square(8),
         };
 
-        System.out.println("Фигура с максимальной площадью: " + getFigureWithMaxArea(shapes));
-
-        System.out.println("Фигура со вторым по величине периметром: " + getFigureWithSecondLargestPerimeter(shapes));
+        System.out.println("Фигура с максимальной площадью: " + getShapeWithMaxArea(shapes));
+        System.out.println("Фигура со вторым по величине периметром: " + getShapeWithSecondLargestPerimeter(shapes));
     }
 
-    public static Shape getFigureWithMaxArea(Shape[] shapes) {
+    public static Shape getShapeWithMaxArea(Shape[] shapes) {
         if (shapes.length == 0) {
             return null;
         }
 
-        if (shapes.length == 1) {
-            return shapes[0];
-        }
-
-        Arrays.sort(shapes, new figureAreaComparator());
+        Arrays.sort(shapes, new ShapeAreaComparator());
         return shapes[shapes.length - 1];
     }
 
-    public static Shape getFigureWithSecondLargestPerimeter(Shape[] shapes) {
-        if (shapes.length == 0) {
+    public static Shape getShapeWithSecondLargestPerimeter(Shape[] shapes) {
+        if (shapes.length == 0 || shapes.length == 1) {
             return null;
         }
 
-        if (shapes.length == 1) {
-            return shapes[0];
-        }
-
-        Arrays.sort(shapes, new figurePerimeterComparator());
+        Arrays.sort(shapes, new ShapePerimeterComparator());
         return shapes[shapes.length - 2];
     }
 }

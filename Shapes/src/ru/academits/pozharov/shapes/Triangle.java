@@ -72,17 +72,18 @@ public class Triangle implements Shape {
     }
 
     @Override
-    public boolean equals(Object shape) {
-        if (shape == this) {
+    public boolean equals(Object object) {
+        if (object == this) {
             return true;
         }
 
-        if (shape == null || shape.getClass() != getClass()) {
+        if (object == null || object.getClass() != getClass()) {
             return false;
         }
 
-        Triangle triangle = (Triangle) shape;
-        return x1 == triangle.x1 && y1 == triangle.y1 && x2 == triangle.x2 && y2 == triangle.y2
+        Triangle triangle = (Triangle) object;
+        return x1 == triangle.x1 && y1 == triangle.y1
+                && x2 == triangle.x2 && y2 == triangle.y2
                 && x3 == triangle.x3 && y3 == triangle.y3;
     }
 
@@ -99,7 +100,7 @@ public class Triangle implements Shape {
         return hash;
     }
 
-    public static double getSideLength(double startX, double startY, double endX, double endY) {
-        return Math.sqrt(Math.pow(startX - endX, 2) + Math.pow(startY - endY, 2));
+    private static double getSideLength(double x1, double y1, double x2, double y2) {
+        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
 }
