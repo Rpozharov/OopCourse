@@ -21,25 +21,25 @@ public class VectorMain {
         System.out.println("Вектор 4 = " + vector4);
         System.out.println("Вектор 5 = " + vector5);
 
-        vector5.deploy();
+        vector5.invert();
         System.out.println("Разворот вектора 5, вектор 5 = " + vector5);
 
-        System.out.printf("Сумма векторов 3 и 4 = %s%n", Vector.getVectorsSum(vector3, vector4));
-        System.out.printf("Разность векторов 3 и 4 = %s%n", Vector.getVectorsDifference(vector3, vector4));
-        System.out.printf("Скалярное произведение векторов 3 и 4 = %.2f%n", Vector.getVectorsScalarProduct(vector3, vector4));
+        System.out.printf("Сумма векторов 3 и 4 = %s%n", Vector.getSum(vector3, vector4));
+        System.out.printf("Разность векторов 3 и 4 = %s%n", Vector.getDifference(vector3, vector4));
+        System.out.printf("Скалярное произведение векторов 3 и 4 = %.2f%n", Vector.getScalarProduct(vector3, vector4));
         System.out.println("Размерность вектора 1 = " + vector1.getSize());
         System.out.printf("Длина вектора 5 = %.2f%n", vector5.getLength());
 
-        vector1.setComponentOnIndex(0, 5);
-        vector1.setComponentOnIndex(1, 8);
-        vector1.setComponentOnIndex(3, 12);
+        vector1.setComponentByIndex(0, 5);
+        vector1.setComponentByIndex(1, 8);
+        vector1.setComponentByIndex(3, 12);
         System.out.println("Вектор 1 = " + vector1);
-        System.out.println("Компонента по индексу 0 вектора 1 = " + vector1.getComponentOnIndex(0));
+        System.out.println("Компонента по индексу 0 вектора 1 = " + vector1.getComponentByIndex(0));
 
-        vector3.addVector(vector4);
+        vector3.add(vector4);
         System.out.println("Прибавление к вектору 3 вектора 4, вектор 3 = " + vector3);
 
-        vector3.subtractVector(vector5);
+        vector3.subtract(vector5);
         System.out.println("Вычитание из вектора 3 вектора 5, вектор 3 = " + vector3);
 
         vector4.multipleByScalar(5);
