@@ -33,7 +33,7 @@ public class ShapesMain {
     }
 
     public static Shape getShapeWithSecondLargestPerimeter(Shape[] shapes) {
-        if (shapes.length == 0 || shapes.length == 1) {
+        if (shapes.length <= 1) {
             return null;
         }
 
