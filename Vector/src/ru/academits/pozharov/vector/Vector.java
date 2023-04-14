@@ -21,6 +21,7 @@ public class Vector {
         if (array.length == 0) {
             throw new IllegalArgumentException("Длина массива должна быть > 0. Текущее значение: " + array.length);
         }
+
         components = Arrays.copyOf(array, array.length);
     }
 
@@ -63,9 +64,7 @@ public class Vector {
     }
 
     public void invert() {
-        for (int i = 0; i < components.length; i++) {
-            components[i] *= -1;
-        }
+        multipleByScalar(-1);
     }
 
     public double getLength() {
@@ -80,8 +79,8 @@ public class Vector {
 
     public double getComponentByIndex(int index) {
         if (index < 0 || index >= components.length) {
-            throw new IndexOutOfBoundsException("Индекс должен быть > 0 и < размерности. Текущее значение размерности: "
-                    + index + " , индекса: " + index);
+            throw new IndexOutOfBoundsException("Индекс должен быть >= 0 и < размерности: " + components.length
+                    + ". Текущее значение индекса: " + index);
         }
 
         return components[index];
@@ -89,8 +88,8 @@ public class Vector {
 
     public void setComponentByIndex(int index, double component) {
         if (index < 0 || index >= components.length) {
-            throw new IndexOutOfBoundsException("Индекс должен быть > 0 и < размерности. Текущее значение размерности: "
-                    + index + " , индекса: " + index);
+            throw new IndexOutOfBoundsException("Индекс должен быть >= 0 и < размерности: " + components.length
+                    + ". Текущее значение индекса: " + index);
         }
 
         components[index] = component;
@@ -122,14 +121,14 @@ public class Vector {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("{");
+        stringBuilder.append('{');
 
         for (double component : components) {
             stringBuilder.append(component).append(", ");
         }
 
         stringBuilder.setLength(stringBuilder.length() - 2);
-        stringBuilder.append("}");
+        stringBuilder.append('}');
         return stringBuilder.toString();
     }
 
