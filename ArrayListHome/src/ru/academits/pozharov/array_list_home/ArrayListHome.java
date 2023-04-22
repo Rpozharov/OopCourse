@@ -18,7 +18,7 @@ public class ArrayListHome {
                 stringsList.add(string);
             }
 
-            System.out.println("Список строк " + stringsList);
+            System.out.println("Список строк: " + stringsList);
         } catch (IOException e) {
             System.out.println("Не удалось прочитать файл");
         }
