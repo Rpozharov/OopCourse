@@ -1,51 +1,54 @@
 package ru.academits.pozharov.array_list_home;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class ArrayListHome {
-    public static void main(String[] args) throws FileNotFoundException {
-        ArrayList<String> list1 = new ArrayList<>();
+    public static void main(String[] args) {
+        ArrayList<String> stringsList = new ArrayList<>();
 
-        try (Scanner scanner = new Scanner(new FileInputStream("input.txt"))) {
-            while (scanner.hasNextLine()) {
-                list1.add(scanner.nextLine());
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("input.txt"));
+            String string;
+
+            while ((string = bufferedReader.readLine()) != null) {
+                stringsList.add(string);
             }
+
+            System.out.println("Список строк " + stringsList);
+        } catch (IOException e) {
+            System.out.println("Не удалось прочитать файл");
         }
 
-        System.out.println("Список строк " + list1);
+        ArrayList<Integer> oddNumbersList = new ArrayList<>();
+        oddNumbersList.add(5);
+        oddNumbersList.add(4);
+        oddNumbersList.add(7);
+        oddNumbersList.add(6);
+        oddNumbersList.add(8);
+        oddNumbersList.add(9);
 
-        ArrayList<Integer> list2 = new ArrayList<>();
-        list2.add(5);
-        list2.add(4);
-        list2.add(7);
-        list2.add(6);
-        list2.add(8);
-        list2.add(9);
-
-        for (int i = 0; i < list2.size(); i++) {
-            if (list2.get(i) % 2 == 0) {
-                list2.remove(i);
+        for (int i = 0; i < oddNumbersList.size(); i++) {
+            if (oddNumbersList.get(i) % 2 == 0) {
+                oddNumbersList.remove(i);
                 i--;
             }
         }
 
-        System.out.println("Список нечетных чисел " + list2);
+        System.out.println("Список нечетных чисел: " + oddNumbersList);
 
-        ArrayList<Integer> list3 = new ArrayList<>(Arrays.asList(1, 5, 5, 1, 3, 5, 3));
-        ArrayList<Integer> list4 = new ArrayList<>();
+        ArrayList<Integer> numbersList = new ArrayList<>(Arrays.asList(1, 5, 5, 1, 3, 5, 3));
+        ArrayList<Integer> uniqueNumbersList = new ArrayList<>(numbersList.size());
 
-        for (Integer e : list3) {
-            if (list4.contains(e)) {
-                continue;
+        for (Integer e : numbersList) {
+            if (!uniqueNumbersList.contains(e)) {
+                uniqueNumbersList.add(e);
             }
-
-            list4.add(e);
         }
 
-        System.out.println("Список без повторений " + list4);
+        System.out.println("Список чисел без повторений: " + uniqueNumbersList);
     }
 }

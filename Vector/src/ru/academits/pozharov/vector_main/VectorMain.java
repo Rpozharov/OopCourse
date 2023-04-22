@@ -42,7 +42,7 @@ public class VectorMain {
         vector3.subtract(vector5);
         System.out.println("Вычитание из вектора 3 вектора 5, вектор 3 = " + vector3);
 
-        vector4.multipleByScalar(5);
+        vector4.multiplyByScalar(5);
         System.out.println("Умножение вектора 4 на скаляр 5, вектор 4 = " + vector4);
     }
 }

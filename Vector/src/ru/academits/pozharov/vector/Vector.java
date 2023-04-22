@@ -57,14 +57,14 @@ public class Vector {
         }
     }
 
-    public void multipleByScalar(double scalar) {
+    public void multiplyByScalar(double scalar) {
         for (int i = 0; i < components.length; i++) {
             components[i] *= scalar;
         }
     }
 
     public void invert() {
-        multipleByScalar(-1);
+        multiplyByScalar(-1);
     }
 
     public double getLength() {
