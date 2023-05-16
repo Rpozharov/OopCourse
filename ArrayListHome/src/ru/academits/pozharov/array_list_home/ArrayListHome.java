@@ -1,6 +1,7 @@
 package ru.academits.pozharov.array_list_home;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,18 +10,29 @@ import java.util.Arrays;
 public class ArrayListHome {
     public static void main(String[] args) {
         ArrayList<String> stringsList = new ArrayList<>();
+        BufferedReader bufferedReader = null;
 
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("input.txt"));
-            String string;
+            bufferedReader = new BufferedReader(new FileReader("input.txt"));
+            String line;
 
-            while ((string = bufferedReader.readLine()) != null) {
-                stringsList.add(string);
+            while ((line = bufferedReader.readLine()) != null) {
+                stringsList.add(line);
             }
 
             System.out.println("Список строк: " + stringsList);
+        } catch (FileNotFoundException e) {
+            System.out.println("Не удалось найти файл");
         } catch (IOException e) {
             System.out.println("Не удалось прочитать файл");
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    System.out.println("Не удалось завершить работу с файлом");
+                }
+            }
         }
 
         ArrayList<Integer> oddNumbersList = new ArrayList<>();
