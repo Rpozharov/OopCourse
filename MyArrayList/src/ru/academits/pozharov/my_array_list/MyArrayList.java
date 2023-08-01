@@ -3,7 +3,7 @@ package ru.academits.pozharov.my_array_list;
 import java.util.*;
 
 public class MyArrayList<E> implements List<E> {
-    public E[] items;
+    private E[] items;
     private int size;
 
     public MyArrayList() {

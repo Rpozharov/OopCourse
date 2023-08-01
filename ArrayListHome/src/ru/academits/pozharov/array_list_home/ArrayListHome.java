@@ -9,39 +9,23 @@ import java.util.Arrays;
 
 public class ArrayListHome {
     public static void main(String[] args) {
-        ArrayList<String> stringsList = new ArrayList<>();
-        BufferedReader bufferedReader = null;
+        ArrayList<String> linesList = new ArrayList<>();
 
-        try {
-            bufferedReader = new BufferedReader(new FileReader("input.txt"));
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("input.txt"))) {
             String line;
 
             while ((line = bufferedReader.readLine()) != null) {
-                stringsList.add(line);
+                linesList.add(line);
             }
 
-            System.out.println("Список строк: " + stringsList);
+            System.out.println("Список строк: " + linesList);
         } catch (FileNotFoundException e) {
             System.out.println("Не удалось найти файл");
         } catch (IOException e) {
             System.out.println("Не удалось прочитать файл");
-        } finally {
-            if (bufferedReader != null) {
-                try {
-                    bufferedReader.close();
-                } catch (IOException e) {
-                    System.out.println("Не удалось завершить работу с файлом");
-                }
-            }
         }
 
-        ArrayList<Integer> oddNumbersList = new ArrayList<>();
-        oddNumbersList.add(5);
-        oddNumbersList.add(4);
-        oddNumbersList.add(7);
-        oddNumbersList.add(6);
-        oddNumbersList.add(8);
-        oddNumbersList.add(9);
+        ArrayList<Integer> oddNumbersList = new ArrayList<>(Arrays.asList(5, 4, 7, 6, 8, 9));
 
         for (int i = 0; i < oddNumbersList.size(); i++) {
             if (oddNumbersList.get(i) % 2 == 0) {
