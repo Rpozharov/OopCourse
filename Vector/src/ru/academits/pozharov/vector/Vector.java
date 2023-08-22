@@ -112,7 +112,7 @@ public class Vector {
         int minSize = Math.min(vector1.components.length, vector2.components.length);
 
         for (int i = 0; i < minSize; i++) {
-            scalarProduct += vector1.components[i] * vector2.components[i];
+            scalarProduct += (vector1.components[i] * vector2.components[i]);
         }
 
         return scalarProduct;
