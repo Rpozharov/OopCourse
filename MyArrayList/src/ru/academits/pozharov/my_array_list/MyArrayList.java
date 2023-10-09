@@ -49,6 +49,20 @@ public class MyArrayList<E> implements List<E> {
         return false;
     }
 
+    private class MyListIterator implements Iterator<E> {
+        private int currentIndex = -1;
+        @Override
+        public boolean hasNext() {
+            return (currentIndex + 1) < size;
+        }
+
+        @Override
+        public E next() {
+            currentIndex++;
+            return items[currentIndex];
+        }
+    }
+
     @Override
     public Iterator<E> iterator() {
         return null;
@@ -62,7 +76,7 @@ public class MyArrayList<E> implements List<E> {
     @Override
     public <T> T[] toArray(T[] array) {
         //noinspection unchecked
-        return (T[]) Arrays.copyOf(items, size, array.getClass());
+        return (T[]) Arrays.copyOf(items, array.length, array.getClass());
     }
 
     @Override
@@ -78,6 +92,12 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public boolean remove(Object o) {
+        for (int i = 0; i< size; i++) {
+            if (items[i].equals(o)) {
+
+            }
+        }
+
         return false;
     }
 
@@ -145,7 +165,7 @@ public class MyArrayList<E> implements List<E> {
 
         E removedElement = items[index];
         System.arraycopy(items, index + 1, items, index, size - index - 1);
-        items [size - 1] = null;
+        items[size - 1] = null;
         size--;
         return removedElement;
     }
