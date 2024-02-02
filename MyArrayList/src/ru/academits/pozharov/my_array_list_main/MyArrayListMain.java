@@ -2,56 +2,55 @@ package ru.academits.pozharov.my_array_list_main;
 
 import ru.academits.pozharov.my_array_list.MyArrayList;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MyArrayListMain {
     public static void main(String[] args) {
-        MyArrayList<String> names1 = new MyArrayList<>();
-        MyArrayList<String> names2 = new MyArrayList<>();
-        names1.add("text1");
-        names1.add("text2");
-        names1.add("text3");
-        names1.add("text4");
-        names1.add("text5");
-        names1.add("text1");
-        names1.add("text2");
-        names1.add("text3");
-        names1.add("text4");
-        names1.add("text5");
-        names1.add("text1");
-        names1.add("text2");
-        names1.add("text3");
-        names1.add("text4");
-        names1.add("text5");
+        ArrayList<String> arrayList1 = new ArrayList<>(Arrays.asList("text", "may", null, "hello", "may", null));
+        ArrayList<Integer> arrayList2 = new ArrayList<>(Arrays.asList(5, 8, 4, null, 4, 4, 10));
 
-        System.out.println(names1);
+        MyArrayList<String> myArrayList1 = new MyArrayList<>(50);
+        MyArrayList<Integer> myArrayList2 = new MyArrayList<>();
+        MyArrayList<Integer> myArrayList3 = new MyArrayList<>();
 
-        System.out.println(names1.remove("text4"));
+        myArrayList1.addAll(arrayList1);
+        myArrayList2.addAll(arrayList2);
+        myArrayList3.add(2);
+        myArrayList3.add(10);
+        myArrayList3.add(7);
+        myArrayList3.add(4);
 
-        names1.remove("text4");
+        System.out.println("myArrayList1 = " + myArrayList1);
+        System.out.println("myArrayList2 = " + myArrayList2);
+        System.out.println("myArrayList3 = " + myArrayList3);
+        System.out.println("Размер списка myArrayList1 = " + myArrayList1.size());
 
-        System.out.println(names1);
+        myArrayList1.remove("may");
+        System.out.println("myArrayList1 = " + myArrayList1);
 
-        String [] array1 = {"hello","text", "may", "name"};
-        String [] array2 = new String[2];
-        int [] array3 = new int[5];
+        myArrayList1.add(1, "Monday");
+        System.out.println("myArrayList1 = " + myArrayList1);
 
-        names2.add("Monday");
-        names2.add("Tuesday");
-        names2.add("Wednesday");
-        names2.add("Thursday");
-        names2.add("Friday");
-        names2.add("Saturday");
-        names2.add("Sunday");
+        myArrayList1.remove(2);
+        System.out.println("myArrayList1 = " + myArrayList1);
 
-        System.out.println(names2.size());
+        System.out.println("Элемент по индексу 2 списка myArrayList1 = " + myArrayList1.get(3));
 
-        System.out.println(Arrays.toString(names1.toArray(array2)));
+        System.out.println("myArrayList2 = " + myArrayList2);
+        MyArrayList<Integer> myArrayList4 = new MyArrayList<>();
+        myArrayList4.addAll(myArrayList2);
+        System.out.println("myArrayList4 = " + myArrayList4);
+        System.out.println("myArrayList3 = " + myArrayList3);
+        myArrayList2.removeAll(myArrayList3);
+        System.out.println("myArrayList2 = " + myArrayList2);
+        myArrayList4.retainAll(myArrayList3);
+        System.out.println("myArrayList4 = " + myArrayList4);
 
+        myArrayList4.clear();
+        System.out.println("myArrayList4 = " + myArrayList4);
 
-
-
-
-
+        myArrayList1.ensureCapacity(75);
+        myArrayList3.trimToSize();
     }
 }

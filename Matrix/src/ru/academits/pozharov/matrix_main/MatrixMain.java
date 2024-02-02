@@ -9,6 +9,7 @@ public class MatrixMain {
         double[] array2 = {2, 3, 9};
         double[] array3 = {2, 3, 9, 8, 12};
         double[] array4 = {4, 7, 9, 4, 3, 5};
+        double[] array5 = {1, 2, -1};
         double[][] matrixArray1 = {{2, 3, 7, 5}, {2, 4, 10}, {8, 12, 25, 4, 8}};
         double[][] matrixArray2 = {{1, 2, 3, 4, 3}, {2, 3, 4, 5, 5}, {3, 4, 1, 2, 9}, {4, 4, 21, 3, 12}, {5, 12, 17, 0, 14}};
         double[][] matrixArray3 = {{2, 4, 0}, {-2, 1, 3}, {-1, 0, 1}};
@@ -16,13 +17,12 @@ public class MatrixMain {
         double[][] matrixArray5 = {{10, 12, 22}, {17, 9, 5}, {25, 11, 6}};
         double[][] matrixArray6 = {{-1, 2, -3, 0}, {5, 4, -2, 1}, {-8, 11, -10, -5}};
         double[][] matrixArray7 = {{-9, 3}, {6, 20}, {7, 0}, {12, -4}};
-        double[][] matrixArray8 = {{4, 7, 3}, {9, 1, 10}, {6, 12, 8}};
-        double[][] matrixArray9 = {{3}, {5}, {1}};
 
         Vector vector1 = new Vector(array1);
         Vector vector2 = new Vector(array2);
         Vector vector3 = new Vector(array3);
         Vector vector4 = new Vector(array4);
+        Vector vector5 = new Vector(array5);
 
         System.out.println("Вектор 1 = " + vector1);
         System.out.println("Вектор 2 = " + vector2);
@@ -79,12 +79,10 @@ public class MatrixMain {
         System.out.println("Матрица 10 = " + matrix10);
         System.out.println("Произведение матриц 9 и 10 = " + Matrix.getProduct(matrix9, matrix10));
 
-        Matrix matrix11 = new Matrix(matrixArray8);
-        Matrix matrix12 = new Matrix(matrixArray9);
-        System.out.println("Матрица 11 = " + matrix11);
-        System.out.println("Матрица 12 = " + matrix12);
-        System.out.println("Матрица 11, умноженная на матрицу - вектор столбец 12 = " + matrix11.multiplyByColumnVector(matrix12));
+        System.out.println("Вектор строка матрицы 10 по индексу 0 = " + matrix10.getRowByIndex(0));
 
-        System.out.println("Вектор строка матрицы 11 по индексу 1 = " + matrix11.getRowByIndex(0));
+        System.out.println("Матрица 6 = " + matrix6);
+        System.out.println("Вектор 5 = " + vector5);
+        System.out.println("Матрица 6 умноженная на вектор 5 = " + matrix6.multiplyByVector(vector5));
     }
 }
