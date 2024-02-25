@@ -1,14 +1,14 @@
 package ru.academits.pozharov.singly_linked_list;
 
-public class ListItem<E> {
+class ListNode<E> {
     private E data;
-    private ListItem<E> next;
+    private ListNode<E> next;
 
-    public ListItem(E data) {
+    public ListNode(E data) {
         this.data = data;
     }
 
-    public ListItem(E data, ListItem<E> next) {
+    public ListNode(E data, ListNode<E> next) {
         this.data = data;
         this.next = next;
     }
@@ -21,12 +21,11 @@ public class ListItem<E> {
         this.data = data;
     }
 
-    public ListItem<E> getNext() {
+    public ListNode<E> getNext() {
         return next;
-
     }
 
-    public void setNext(ListItem<E> next) {
+    public void setNext(ListNode<E> next) {
         this.next = next;
     }
 }

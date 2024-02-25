@@ -1,187 +1,178 @@
 package ru.academits.pozharov.singly_linked_list;
 
-import java.util.Arrays;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class SinglyLinkedList<E> {
-    private ListItem<E> head;
-    private int count;
+    private ListNode<E> head;
+    private int size;
 
     public int size() {
-        return count;
+        return size;
     }
 
-    public Object getFirstElement() {
-        checkOnEmpty();
+    public E getFirst() {
+        checkIsEmpty();
         return head.getData();
     }
 
-    public E getElementOfIndex(int index) {
+    public E get(int index) {
         checkIndex(index);
         return getNodeOfIndex(index).getData();
     }
 
-    public E setElementOfIndex(int index, E element) {
+    public E set(int index, E data) {
         checkIndex(index);
-        ListItem<E> p = getNodeOfIndex(index);
-        E removedElement = p.getData();
-        p.setData(element);
-        return removedElement;
+
+        ListNode<E> Node = getNodeOfIndex(index);
+        E oldData = Node.getData();
+        Node.setData(data);
+        return oldData;
     }
 
-    public E removeElementOfIndex(int index) {
+    public E remove(int index) {
         checkIndex(index);
 
         if (index == 0) {
-            return removeFirstElement();
+            return removeFirst();
         }
 
-        ListItem<E> p = getNodeOfIndex(index - 1);
-        E removedElement = p.getNext().getData();
-        p.setNext(p.getNext().getNext());
-        count--;
-        return removedElement;
+        ListNode<E> node = getNodeOfIndex(index - 1);
+        E oldData = node.getNext().getData();
+        node.setNext(node.getNext().getNext());
+        size--;
+        return oldData;
     }
 
-    public void addElementToStart(E element) {
-        head = new ListItem<>(element, head);
-        count++;
+    public void addFirst(E data) {
+        head = new ListNode<>(data, head);
+        size++;
     }
 
-    public void addElementOfIndex(int index, E element) {
-        checkIndex(index);
+    public void add(int index, E data) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Индекс должен быть >= 0 и <= размеру списка: " + size
+                    + ". Текущее значение индекса: " + index);
+        }
 
         if (index == 0) {
-            head = new ListItem<>(element, head);
+            head = new ListNode<>(data, head);
         } else {
-            ListItem<E> p = getNodeOfIndex(index - 1);
-            p.setNext(new ListItem<>(element, p.getNext()));
+            ListNode<E> node = getNodeOfIndex(index - 1);
+            node.setNext(new ListNode<>(data, node.getNext()));
         }
 
-        count++;
+        size++;
     }
 
-    public boolean removeElement(E element) {
-        if (count == 0) {
+    public boolean removeData(E data) {
+        if (size == 0) {
             return false;
         }
 
-        int i = 0;
-        ListItem<E> p = head;
-        boolean isRemoved = false;
+        if (Objects.equals(head.getData(), data)) {
+            head = head.getNext();
+            size--;
+            return true;
+        }
 
-        if (element == null) {
-            while (p.getNext() != null) {
-                if (p.getData() == null) {
-                    removeElementOfIndex(i);
-                    isRemoved = true;
-                    break;
+        for (ListNode<E> currentNode = head, prevNode = null; currentNode != null; prevNode = currentNode, currentNode = currentNode.getNext()) {
+            if (Objects.equals(data, currentNode.getData())) {
+                if (prevNode != null) {
+                    prevNode.setNext(currentNode.getNext());
                 }
 
-                p = p.getNext();
-                i++;
-            }
-
-        } else {
-            while (p != null) {
-                if (element.equals(p.getData())) {
-                    removeElementOfIndex(i);
-                    isRemoved = true;
-                    break;
-                }
-
-                p = p.getNext();
-                i++;
+                size--;
+                return true;
             }
         }
 
-        return isRemoved;
+        return false;
     }
 
-    public E removeFirstElement() {
-        checkOnEmpty();
-        E removedElement = head.getData();
+    public E removeFirst() {
+        checkIsEmpty();
+        E oldData = head.getData();
         head = head.getNext();
-        count--;
-        return removedElement;
+        size--;
+        return oldData;
     }
 
     public void revert() {
-        if (count <= 1) {
+        if (size <= 1) {
             return;
         }
 
-        ListItem<E> p = head;
-        ListItem<E> lastNode = head;
-        p = p.getNext();
+        ListNode<E> currentNode = head;
+        ListNode<E> prevNode = null;
+        ListNode<E> nextNode = currentNode.getNext();
 
-        while (p != null) {
-            head = new ListItem<>(p.getData(), head);
-            p = p.getNext();
+        while (nextNode != null) {
+            currentNode.setNext(prevNode);
+            prevNode = currentNode;
+            currentNode = nextNode;
+            nextNode = currentNode.getNext();
         }
 
-        lastNode.setNext(null);
+        currentNode.setNext(prevNode);
+        head = currentNode;
     }
 
     public SinglyLinkedList<E> copy() {
-        if (count == 0) {
+        if (size == 0) {
             return new SinglyLinkedList<>();
         }
 
-        ListItem<E> p = head;
+        ListNode<E> node = head;
         SinglyLinkedList<E> resultList = new SinglyLinkedList<>();
-        resultList.head = new ListItem<>(p.getData());
-        ListItem<E> pNew = resultList.head;
-        resultList.count++;
-        p = p.getNext();
+        resultList.head = new ListNode<>(node.getData());
+        ListNode<E> resultNode = resultList.head;
+        node = node.getNext();
 
-        while (p != null) {
-            pNew.setNext(new ListItem<>(p.getData()));
-            p = p.getNext();
-            pNew = pNew.getNext();
-            resultList.count++;
+        while (node != null) {
+            resultNode.setNext(new ListNode<>(node.getData()));
+            node = node.getNext();
+            resultNode = resultNode.getNext();
         }
 
+        resultList.size = size;
         return resultList;
     }
 
     @Override
     public String toString() {
-        Object[] elements = new Object[count];
-        int index = 0;
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append('{');
 
-        for (ListItem<E> p = head; p != null; p = p.getNext()) {
-            elements[index] = p.getData();
-            index++;
+        for (ListNode<E> Node = head; Node != null; Node = Node.getNext()) {
+            stringBuilder.append(Node.getData()).append(", ");
         }
 
-        return Arrays.toString(elements);
+        stringBuilder.setLength(stringBuilder.length() - 2);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
     }
 
     private void checkIndex(int index) {
-        if (index < 0 || index >= count) {
-            throw new IndexOutOfBoundsException("Индекс должен быть >= 0 и < размера списка: " + count
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Индекс должен быть >= 0 и < размера списка: " + size
                     + ". Текущее значение индекса: " + index);
         }
     }
 
-    private void checkOnEmpty() {
-        if (count == 0) {
-            throw new IndexOutOfBoundsException("Список не должен быть пустым");
+    private void checkIsEmpty() {
+        if (size == 0) {
+            throw new NoSuchElementException("Список пуст");
         }
     }
 
-    private ListItem<E> getNodeOfIndex(int index) {
-        int i = 0;
-        ListItem<E> p = head;
+    private ListNode<E> getNodeOfIndex(int index) {
+        ListNode<E> Node = head;
 
-        while (p.getNext() != null) {
-            if (i == index) {
-                break;
-            }
-
-            p = p.getNext();
-            i++;
+        for (int i = 0; i != index; i++) {
+            Node = Node.getNext();
         }
-        return p;
+
+        return Node;
     }
 }

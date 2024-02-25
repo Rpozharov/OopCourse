@@ -4,43 +4,38 @@ import ru.academits.pozharov.singly_linked_list.SinglyLinkedList;
 
 public class SinglyLinkedListMain {
     public static void main(String[] args) {
-        SinglyLinkedList<Integer> singlyLinkedList1 = new SinglyLinkedList<>();
-        singlyLinkedList1.addElementToStart(null);
-        singlyLinkedList1.addElementToStart(10);
-        singlyLinkedList1.addElementToStart(3);
-        singlyLinkedList1.addElementToStart(5);
-        singlyLinkedList1.addElementToStart(8);
 
-        System.out.println("Размер списка singlyLinkedList1 = " + singlyLinkedList1.size());
-        System.out.println("Первый элемент списка singlyLinkedList1 = " + singlyLinkedList1.getFirstElement());
-        System.out.println("singlyLinkedList1 = " + singlyLinkedList1);
-        System.out.println("Элемент списка singlyLinkedList1 по индексу 1 = " + singlyLinkedList1.getElementOfIndex(1));
-        System.out.println(singlyLinkedList1.setElementOfIndex(3, 17));
-        System.out.println("singlyLinkedList1 = " + singlyLinkedList1);
-        singlyLinkedList1.addElementOfIndex(4, 23);
-        System.out.println("singlyLinkedList1 = " + singlyLinkedList1);
-        System.out.println(singlyLinkedList1.removeFirstElement());
-        System.out.println("singlyLinkedList1 = " + singlyLinkedList1);
-        Integer removedElement = singlyLinkedList1.removeElementOfIndex(3);
-        System.out.println("singlyLinkedList1 = " + singlyLinkedList1);
-        System.out.println("Удаленный элемент списка singlyLinkedList1 = " + removedElement);
-        System.out.println("singlyLinkedList1 = " + singlyLinkedList1);
-        singlyLinkedList1.revert();
-        System.out.println("singlyLinkedList1 = " + singlyLinkedList1);
-        System.out.println(singlyLinkedList1.removeElement(5));
-        System.out.println("singlyLinkedList1 = " + singlyLinkedList1);
+        SinglyLinkedList<Integer> numbersList = new SinglyLinkedList<>();
+        numbersList.addFirst(7);
+        numbersList.addFirst(10);
+        numbersList.addFirst(3);
+        numbersList.addFirst(5);
+        numbersList.addFirst(8);
 
-        SinglyLinkedList<String> singlyLinkedList2 = new SinglyLinkedList<>();
-        singlyLinkedList2.addElementToStart(null);
-        singlyLinkedList2.addElementToStart("test");
-        singlyLinkedList2.addElementToStart("text");
-        singlyLinkedList2.addElementToStart("May");
-        singlyLinkedList2.addElementToStart("Hello");
+        System.out.println("Размер списка numbersList = " + numbersList.size());
+        System.out.println("Первый элемент списка numbersList = " + numbersList.getFirst());
+        System.out.println("numbersList = " + numbersList);
+        System.out.println("Элемент списка numbersList по индексу 1 = " + numbersList.get(1));
+        System.out.println(numbersList.set(3, 17));
+        System.out.println("numbersList = " + numbersList);
+        Integer removedElement = numbersList.remove(3);
+        System.out.println("Удаленный элемент списка numbersList = " + removedElement);
+        System.out.println("numbersList = " + numbersList);
+        numbersList.add(3, 23);
+        System.out.println("numbersList = " + numbersList);
+        System.out.println(numbersList.removeData(23));
+        System.out.println("numbersList = " + numbersList);
+        numbersList.revert();
+        System.out.println("numbersList = " + numbersList);
 
-        SinglyLinkedList<String> singlyLinkedList3 = new SinglyLinkedList<>();
-        System.out.println("singlyLinkedList2 = " + singlyLinkedList2);
-        System.out.println("singlyLinkedList3 = " + singlyLinkedList3);
-        singlyLinkedList3 = singlyLinkedList2.copy();
-        System.out.println("singlyLinkedList3 = " + singlyLinkedList3);
+        SinglyLinkedList<String> stringsList1 = new SinglyLinkedList<>();
+        stringsList1.addFirst(null);
+        stringsList1.addFirst("test");
+        stringsList1.addFirst("text");
+        stringsList1.addFirst("May");
+        stringsList1.addFirst("Hello");
+        System.out.println("stringsList1 = " + stringsList1);
+        SinglyLinkedList<String> stringsList2 = stringsList1.copy();
+        System.out.println("stringsList2 = " + stringsList2);
     }
 }
