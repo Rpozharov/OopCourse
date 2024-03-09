@@ -4,7 +4,6 @@ import ru.academits.pozharov.singly_linked_list.SinglyLinkedList;
 
 public class SinglyLinkedListMain {
     public static void main(String[] args) {
-
         SinglyLinkedList<Integer> numbersList = new SinglyLinkedList<>();
         numbersList.addFirst(7);
         numbersList.addFirst(10);
@@ -37,5 +36,8 @@ public class SinglyLinkedListMain {
         System.out.println("stringsList1 = " + stringsList1);
         SinglyLinkedList<String> stringsList2 = stringsList1.copy();
         System.out.println("stringsList2 = " + stringsList2);
+
+        SinglyLinkedList<String> stringsList3 = new SinglyLinkedList<>();
+        System.out.println("stringsList3 = " + stringsList3);
     }
 }

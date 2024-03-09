@@ -18,15 +18,16 @@ public class SinglyLinkedList<E> {
 
     public E get(int index) {
         checkIndex(index);
-        return getNodeOfIndex(index).getData();
+        return getNode(index).getData();
     }
 
     public E set(int index, E data) {
         checkIndex(index);
 
-        ListNode<E> Node = getNodeOfIndex(index);
-        E oldData = Node.getData();
-        Node.setData(data);
+        ListNode<E> node = getNode(index);
+        E oldData = node.getData();
+        node.setData(data);
+
         return oldData;
     }
 
@@ -37,11 +38,12 @@ public class SinglyLinkedList<E> {
             return removeFirst();
         }
 
-        ListNode<E> node = getNodeOfIndex(index - 1);
-        E oldData = node.getNext().getData();
+        ListNode<E> node = getNode(index - 1);
+        E removedData = node.getNext().getData();
         node.setNext(node.getNext().getNext());
         size--;
-        return oldData;
+
+        return removedData;
     }
 
     public void addFirst(E data) {
@@ -58,7 +60,7 @@ public class SinglyLinkedList<E> {
         if (index == 0) {
             head = new ListNode<>(data, head);
         } else {
-            ListNode<E> node = getNodeOfIndex(index - 1);
+            ListNode<E> node = getNode(index - 1);
             node.setNext(new ListNode<>(data, node.getNext()));
         }
 
@@ -76,12 +78,9 @@ public class SinglyLinkedList<E> {
             return true;
         }
 
-        for (ListNode<E> currentNode = head, prevNode = null; currentNode != null; prevNode = currentNode, currentNode = currentNode.getNext()) {
+        for (ListNode<E> currentNode = head, previousNode = null; currentNode != null; previousNode = currentNode, currentNode = currentNode.getNext()) {
             if (Objects.equals(data, currentNode.getData())) {
-                if (prevNode != null) {
-                    prevNode.setNext(currentNode.getNext());
-                }
-
+                Objects.requireNonNull(previousNode).setNext(currentNode.getNext());
                 size--;
                 return true;
             }
@@ -92,10 +91,12 @@ public class SinglyLinkedList<E> {
 
     public E removeFirst() {
         checkIsEmpty();
-        E oldData = head.getData();
+
+        E removedData = head.getData();
         head = head.getNext();
         size--;
-        return oldData;
+
+        return removedData;
     }
 
     public void revert() {
@@ -104,17 +105,17 @@ public class SinglyLinkedList<E> {
         }
 
         ListNode<E> currentNode = head;
-        ListNode<E> prevNode = null;
+        ListNode<E> previousNode = null;
         ListNode<E> nextNode = currentNode.getNext();
 
         while (nextNode != null) {
-            currentNode.setNext(prevNode);
-            prevNode = currentNode;
+            currentNode.setNext(previousNode);
+            previousNode = currentNode;
             currentNode = nextNode;
             nextNode = currentNode.getNext();
         }
 
-        currentNode.setNext(prevNode);
+        currentNode.setNext(previousNode);
         head = currentNode;
     }
 
@@ -123,19 +124,17 @@ public class SinglyLinkedList<E> {
             return new SinglyLinkedList<>();
         }
 
-        ListNode<E> node = head;
         SinglyLinkedList<E> resultList = new SinglyLinkedList<>();
-        resultList.head = new ListNode<>(node.getData());
-        ListNode<E> resultNode = resultList.head;
-        node = node.getNext();
+        resultList.head = new ListNode<>(head.getData());
+        resultList.size = size;
 
-        while (node != null) {
-            resultNode.setNext(new ListNode<>(node.getData()));
-            node = node.getNext();
+        ListNode<E> resultNode = resultList.head;
+
+        for (ListNode<E> node = head.getNext(); node != null; node = node.getNext()) {
+            resultNode.setNext(new ListNode<>(node.getData(), node.getNext()));
             resultNode = resultNode.getNext();
         }
 
-        resultList.size = size;
         return resultList;
     }
 
@@ -144,12 +143,18 @@ public class SinglyLinkedList<E> {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append('{');
 
-        for (ListNode<E> Node = head; Node != null; Node = Node.getNext()) {
-            stringBuilder.append(Node.getData()).append(", ");
+        if (size == 0) {
+            stringBuilder.append('}');
+            return stringBuilder.toString();
+        }
+
+        for (ListNode<E> node = head; node != null; node = node.getNext()) {
+            stringBuilder.append(node.getData()).append(", ");
         }
 
         stringBuilder.setLength(stringBuilder.length() - 2);
         stringBuilder.append('}');
+
         return stringBuilder.toString();
     }
 
@@ -166,13 +171,13 @@ public class SinglyLinkedList<E> {
         }
     }
 
-    private ListNode<E> getNodeOfIndex(int index) {
-        ListNode<E> Node = head;
+    private ListNode<E> getNode(int index) {
+        ListNode<E> node = head;
 
-        for (int i = 0; i != index; i++) {
-            Node = Node.getNext();
+        for (int i = 0; i < index; i++) {
+            node = node.getNext();
         }
 
-        return Node;
+        return node;
     }
 }
