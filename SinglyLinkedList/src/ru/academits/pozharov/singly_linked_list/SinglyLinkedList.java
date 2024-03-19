@@ -38,9 +38,9 @@ public class SinglyLinkedList<E> {
             return removeFirst();
         }
 
-        ListNode<E> node = getNode(index - 1);
-        E removedData = node.getNext().getData();
-        node.setNext(node.getNext().getNext());
+        ListNode<E> previousNode = getNode(index - 1);
+        E removedData = previousNode.getNext().getData();
+        previousNode.setNext(previousNode.getNext().getNext());
         size--;
 
         return removedData;
@@ -60,8 +60,8 @@ public class SinglyLinkedList<E> {
         if (index == 0) {
             head = new ListNode<>(data, head);
         } else {
-            ListNode<E> node = getNode(index - 1);
-            node.setNext(new ListNode<>(data, node.getNext()));
+            ListNode<E> previousNode = getNode(index - 1);
+            previousNode.setNext(new ListNode<>(data, previousNode.getNext()));
         }
 
         size++;
@@ -131,7 +131,7 @@ public class SinglyLinkedList<E> {
         ListNode<E> resultNode = resultList.head;
 
         for (ListNode<E> node = head.getNext(); node != null; node = node.getNext()) {
-            resultNode.setNext(new ListNode<>(node.getData(), node.getNext()));
+            resultNode.setNext(new ListNode<>(node.getData(), resultNode.getNext()));
             resultNode = resultNode.getNext();
         }
 
@@ -140,20 +140,19 @@ public class SinglyLinkedList<E> {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append('{');
-
-        if (size == 0) {
-            stringBuilder.append('}');
-            return stringBuilder.toString();
+        if (size == 0){
+            return "[]";
         }
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append('[');
 
         for (ListNode<E> node = head; node != null; node = node.getNext()) {
             stringBuilder.append(node.getData()).append(", ");
         }
 
         stringBuilder.setLength(stringBuilder.length() - 2);
-        stringBuilder.append('}');
+        stringBuilder.append(']');
 
         return stringBuilder.toString();
     }
