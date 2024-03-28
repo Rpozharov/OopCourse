@@ -7,15 +7,15 @@ import java.util.LinkedList;
 
 public class ArrayListMain {
     public static void main(String[] args) {
-        LinkedList<String> LinkedList1 = new LinkedList<>(Arrays.asList("text", "may", null, "hello", "may", null));
-        LinkedList<Integer> LinkedList2 = new LinkedList<>(Arrays.asList(5, 8, 4, null, 4, 4, 10));
+        LinkedList<String> linkedList1 = new LinkedList<>(Arrays.asList("text", "may", null, "hello", "may", null));
+        LinkedList<Integer> linkedList2 = new LinkedList<>(Arrays.asList(5, 8, 4, null, 4, 4, 10));
 
         ArrayList<String> arrayList1 = new ArrayList<>(50);
         ArrayList<Integer> arrayList2 = new ArrayList<>();
         ArrayList<Integer> arrayList3 = new ArrayList<>();
 
-        arrayList1.addAll(LinkedList1);
-        arrayList2.addAll(LinkedList2);
+        arrayList1.addAll(linkedList1);
+        arrayList2.addAll(linkedList2);
         arrayList3.add(2);
         arrayList3.add(10);
         arrayList3.add(7);
