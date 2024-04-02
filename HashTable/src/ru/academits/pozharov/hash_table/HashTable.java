@@ -3,7 +3,7 @@ package ru.academits.pozharov.hash_table;
 import java.util.*;
 
 public class HashTable<E> implements Collection<E> {
-    private ArrayList<E>[] lists;
+    private final ArrayList<E>[] lists;
     private int size;
     private int modCount;
     private static final int DEFAULT_CAPACITY = 10;
@@ -14,7 +14,7 @@ public class HashTable<E> implements Collection<E> {
     }
 
     public HashTable(int initialCapacity) {
-        if (initialCapacity < 0) {
+        if (initialCapacity <= 0) {
             throw new IllegalArgumentException("Вместимость должна быть > 0, текущее значение: " + initialCapacity);
         }
 
@@ -34,7 +34,7 @@ public class HashTable<E> implements Collection<E> {
 
     @Override
     public boolean contains(Object o) {
-        int index = GetIndex(o);
+        int index = getIndex(o);
 
         if (lists[index] == null) {
             return false;
@@ -44,7 +44,7 @@ public class HashTable<E> implements Collection<E> {
     }
 
     private class HashTableIterator implements Iterator<E> {
-        private int arrayCurrentIndex = 0;
+        private int arrayCurrentIndex;
         private int listCurrentIndex = -1;
         private int count;
         private final int expectedModCount = modCount;
@@ -125,7 +125,7 @@ public class HashTable<E> implements Collection<E> {
 
     @Override
     public boolean add(E e) {
-        int index = GetIndex(e);
+        int index = getIndex(e);
 
         if (lists[index] == null) {
             lists[index] = new ArrayList<>();
@@ -140,7 +140,7 @@ public class HashTable<E> implements Collection<E> {
 
     @Override
     public boolean remove(Object o) {
-        int index = GetIndex(o);
+        int index = getIndex(o);
 
         if (lists[index] == null) {
             return false;
@@ -185,24 +185,50 @@ public class HashTable<E> implements Collection<E> {
             return false;
         }
 
-        boolean isRemove = false;
+        boolean isRemoved = false;
 
-        for (Object element: c) {
-            while (contains(element)){
-                isRemove = remove(element);
+        for (Object element : c) {
+            while (remove(element)) {
+                isRemoved = true;
             }
         }
 
-        return isRemove;
+        return isRemoved;
     }
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
+        int arrayCurrentIndex = 0;
+        int tempSize = 0;
+        boolean isRemoved = false;
+
+        while (arrayCurrentIndex < lists.length) {
+            if (lists[arrayCurrentIndex] != null) {
+                isRemoved = lists[arrayCurrentIndex].retainAll(c);
+                tempSize += lists[arrayCurrentIndex].size();
+                size = tempSize;
+            }
+
+            arrayCurrentIndex++;
+        }
+
+        if (isRemoved) {
+            modCount++;
+        }
+
+        return isRemoved;
     }
 
     @Override
     public void clear() {
+        if (isEmpty()) {
+            return;
+        }
+
+        Arrays.fill(lists, null);
+
+        size = 0;
+        modCount++;
     }
 
     @Override
@@ -228,7 +254,7 @@ public class HashTable<E> implements Collection<E> {
         return stringBuilder.toString();
     }
 
-    private int GetIndex(Object o) {
+    private int getIndex(Object o) {
         if (o == null) {
             return 0;
         }

@@ -1,7 +1,6 @@
 package ru.academits.pozharov.hash_table_main;
 
 import ru.academits.pozharov.hash_table.HashTable;
-import ru.academits.pozharov.hash_table.HashTableDel;
 
 import java.util.Arrays;
 
@@ -47,10 +46,10 @@ public class HashTableMain {
         hashTable1.remove(5);
         System.out.println("hashTable1 = " + hashTable1);
 
-        HashTableDel<Integer> hashTableDel4 = new HashTableDel<>();
-        hashTableDel4.addAll(Arrays.asList(2, 7, 5, 9, 0, 3));
+        HashTable<Integer> hashTable4 = new HashTable<>();
+        hashTable4.addAll(Arrays.asList(2, 7, 5, 9, 0, 3));
 
-        System.out.println("hashTable4 = " + hashTableDel4);
+        System.out.println("hashTable4 = " + hashTable4);
 
         hashTable1.clear();
         System.out.println("hashTable1 = " + hashTable1);
@@ -62,22 +61,5 @@ public class HashTableMain {
         System.out.println("hashTable3 = " + hashTable3);
         hashTable3.removeAll(Arrays.asList(null, 7, 5));
         System.out.println("hashTable3 = " + hashTable3);
-
-        System.out.println("--------------------------");
-
-        System.out.println("hashTable1 = " + hashTable1);
-        System.out.println("hashTable3 = " + hashTable3);
-
-        HashTable<Integer> hashTable5 = new HashTable<>();
-
-        hashTable5.addAll(Arrays.asList(3, 7, 10, 18, null));
-
-        System.out.println("hashTable5 = " + hashTable5);
-
-        System.out.println(hashTable1.removeAll(Arrays.asList(3, null,12)));
-
-        System.out.println("hashTable1 = " + hashTable1);
-
-
     }
 }
