@@ -78,9 +78,9 @@ public class SinglyLinkedList<E> {
             return true;
         }
 
-        for (ListNode<E> currentNode = head, previousNode = null; currentNode != null; previousNode = currentNode, currentNode = currentNode.getNext()) {
+        for (ListNode<E> currentNode = head.getNext(), previousNode = head; currentNode != null; previousNode = currentNode, currentNode = currentNode.getNext()) {
             if (Objects.equals(data, currentNode.getData())) {
-                Objects.requireNonNull(previousNode).setNext(currentNode.getNext());
+                previousNode.setNext(currentNode.getNext());
                 size--;
                 return true;
             }
@@ -106,17 +106,16 @@ public class SinglyLinkedList<E> {
 
         ListNode<E> currentNode = head;
         ListNode<E> previousNode = null;
-        ListNode<E> nextNode = currentNode.getNext();
 
-        while (nextNode != null) {
+        while (currentNode != null) {
+            ListNode<E> nextNode = currentNode.getNext();
             currentNode.setNext(previousNode);
             previousNode = currentNode;
             currentNode = nextNode;
-            nextNode = currentNode.getNext();
+
         }
 
-        currentNode.setNext(previousNode);
-        head = currentNode;
+        head = previousNode;
     }
 
     public SinglyLinkedList<E> copy() {
@@ -131,7 +130,7 @@ public class SinglyLinkedList<E> {
         ListNode<E> resultNode = resultList.head;
 
         for (ListNode<E> node = head.getNext(); node != null; node = node.getNext()) {
-            resultNode.setNext(new ListNode<>(node.getData(), resultNode.getNext()));
+            resultNode.setNext(new ListNode<>(node.getData()));
             resultNode = resultNode.getNext();
         }
 
@@ -140,7 +139,7 @@ public class SinglyLinkedList<E> {
 
     @Override
     public String toString() {
-        if (size == 0){
+        if (size == 0) {
             return "[]";
         }
 
