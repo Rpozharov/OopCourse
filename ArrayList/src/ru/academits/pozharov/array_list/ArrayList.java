@@ -153,7 +153,7 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        if (isEmpty()) {
+        if (isEmpty() || c.isEmpty()) {
             return false;
         }
 
@@ -331,7 +331,12 @@ public class ArrayList<E> implements List<E> {
     public int hashCode() {
         int prime = 37;
         int hash = 1;
-        return hash * prime + Arrays.hashCode(Arrays.copyOf(elements, size));
+
+        for (int i = 0; i < size; i++) {
+            hash += prime * hash + (elements[i] != null ? elements[i].hashCode() : 0);
+        }
+
+        return hash;
     }
 
     private void increaseCapacity() {
