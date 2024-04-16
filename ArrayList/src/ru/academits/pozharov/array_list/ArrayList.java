@@ -333,7 +333,7 @@ public class ArrayList<E> implements List<E> {
         int hash = 1;
 
         for (int i = 0; i < size; i++) {
-            hash += prime * hash + (elements[i] != null ? elements[i].hashCode() : 0);
+            hash = prime * hash + (elements[i] != null ? elements[i].hashCode() : 0);
         }
 
         return hash;
