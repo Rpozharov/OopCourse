@@ -1,15 +1,15 @@
 package ru.academits.pozharov.tree;
 
-class TreeNode<E> {
+class Node<E extends Comparable<E>>  {
     private E data;
-    private TreeNode <E> left;
-    private TreeNode <E> right;
+    private Node<E> left;
+    private Node<E> right;
 
-    public TreeNode (E data) {
+    public Node(E data) {
         this.data = data;
     }
 
-    public TreeNode (E data, TreeNode<E> left, TreeNode<E> right) {
+    public Node(E data, Node<E> left, Node<E> right) {
         this.data = data;
         this.left = left;
         this.right = right;
@@ -23,19 +23,19 @@ class TreeNode<E> {
         this.data = data;
     }
 
-    public TreeNode<E> getLeft() {
+    public Node<E> getLeft() {
         return left;
     }
 
-    public void setLeft(TreeNode<E> left) {
+    public void setLeft(Node<E> left) {
         this.left = left;
     }
 
-    public TreeNode<E> getRight() {
+    public Node<E> getRight() {
         return right;
     }
 
-    public void setRight(TreeNode<E> right) {
+    public void setRight(Node<E> right) {
         this.right = right;
     }
 }

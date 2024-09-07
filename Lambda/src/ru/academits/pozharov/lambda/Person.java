@@ -1,4 +1,4 @@
-package ru.academits.pozharov.person;
+package ru.academits.pozharov.lambda;
 
 public class Person {
     private String name;

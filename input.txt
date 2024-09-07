@@ -1,3 +1,0 @@
-hello Line year month Day
-Days
-text text2

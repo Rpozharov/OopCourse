@@ -1,6 +1,7 @@
 package ru.academits.pozharov.shapes_main;
 
 import ru.academits.pozharov.shapes.*;
+import ru.academits.pozharov.temperature.shapes.*;
 import ru.academits.pozharov.shapes_comparators.ShapeAreaComparator;
 import ru.academits.pozharov.shapes_comparators.ShapePerimeterComparator;
 

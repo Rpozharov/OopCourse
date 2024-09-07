@@ -196,7 +196,6 @@ public class Matrix {
         return resultVector;
     }
 
-
     public void add(Matrix matrix) {
         checkSizesEquality(this, matrix);
 
